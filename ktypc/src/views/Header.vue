@@ -5,26 +5,27 @@
     </div>
     <div class="tab">
       <ul>
-        <li>
-          <a href="javascript:;">首页</a>
+        <li @click="current(0)" :class="{current:flag[0]}">
+          <router-link to="/index">首页</router-link>
         </li>
-        <li>
-          <a href="javascript:;">关于我们</a>
+        <li @click="current(1)" :class="{current:flag[1]}">
+          <router-link to="/aboutus">关于我们</router-link>
         </li>
-        <li>
-          <a href="javascript:;">模特展示</a>
+        <li @click="current(2)" :class="{current:flag[2]}">
+          <router-link to="/modelshow">模特展示</router-link>
+          <!-- <a href="javascript:;"></a> -->
         </li>
-        <li>
-          <a href="javascript:;">环境展示</a>
+        <li @click="current(3)" :class="{current:flag[3]}">
+          <router-link to="/environmental">环境展示</router-link>
         </li>
-        <li>
-          <a href="javascript:;">夜场新闻</a>
+        <li @click="current(4)" :class="{current:flag[4]}">
+          <router-link to="/journalism">夜场新闻</router-link>
         </li>
-        <li>
-          <a href="javascript:;">联系我们</a>
+        <li @click="current(5)" :class="{current:flag[5]}">
+          <router-link to="/aboutus">联系我们</router-link>
         </li>
-        <li>
-          <a href="javascript:;">招聘要求</a>
+        <li @click="current(6)" :class="{current:flag[6]}">
+          <router-link to="/aboutus">招聘要求</router-link>
         </li>
       </ul>
     </div>
@@ -81,6 +82,12 @@
           padding: 0 22px 30.5px;
         }
       }
+      .current {
+        a {
+          color: rgb(60, 181, 213);
+          border-bottom: 2px solid rgb(60, 181, 213);
+        }
+      }
     }
   }
   .msg {
@@ -115,3 +122,18 @@
   }
 }
 </style>
+<script>
+export default {
+  data () {
+    return {
+        flag: [true, false, false, false, false, false, false]
+    }
+  },
+  methods: {
+    current (index) {
+      this.flag = [false, false, false, false, false, false, false]
+      this.flag[index] = true
+    }
+  }
+}
+</script>

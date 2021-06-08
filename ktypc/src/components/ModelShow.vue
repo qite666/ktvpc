@@ -1,6 +1,5 @@
 <template>
   <div>
-    <my-head></my-head>
     <div class="modshow-center">
       <div class="cent-left fl">
         <ul class="left-top">
@@ -80,13 +79,15 @@
           </ul>
         </div>
         <div class="right-fot">
-          <span>共有一页</span><span>首页</span><span>上一页</span
-          ><i>{{ msg }}</i
-          ><span>下一页</span><span>尾页</span>
+          <span>共有一页</span>
+          <span>首页</span>
+          <span>上一页</span>
+          <i>{{ msg }}</i>
+          <span>下一页</span>
+          <span>尾页</span>
         </div>
       </div>
     </div>
-    <my-foot></my-foot>
   </div>
 </template>
 <style lang="less" scoped>
@@ -322,17 +323,11 @@
 }
 </style>
 <script>
-import Head from './Header'
-import Foot from './Footer'
 export default {
   data () {
     return {
       msg: 1
     }
-  },
-    components: {
-        myHead: Head,
-        myFoot: Foot
-    }
+  }
 }
 </script>

@@ -1,10 +1,11 @@
 <template>
     <div>
-        <my-head></my-head>
         <div class="content">
+            <!-- <div class="bg"></div> -->
             <div class="banner">
                 <img src="../assets/img/image-10.jpg" alt="">
                 <div class="discounts">
+                    <!-- <VueMarkdown :source="value"></VueMarkdown> -->
                     <p>全场所有啤酒均可享受买二送一，还有更多豪礼等着你!</p>
                     <p>当晚本包间消费满6666以上，当晚可赠送豪华名宿酒店一套，限当天使用。</p>
                     <p>小包低消1080元 中包低消1280 大包低消1380 豪包低消2680</p>
@@ -35,7 +36,7 @@
                         </li>
                         <li>
                             <a href="javascript:;">
-                                <div class="list-top"><img src="../assets/img/14455970_1563958962.jpg" alt=""></div>
+                                <div class="list-top"><img src="../assets/img/20771746_1609919598.jpeg" alt=""></div>
                                 <div class="list-btm">
                                     <h3>成都夜场环境</h3>
                                     <p>联系人：周经理</p>
@@ -50,7 +51,7 @@
                         </li>
                         <li>
                             <a href="javascript:;">
-                                <div class="list-top"><img src="../assets/img/14455970_1563958962.jpg" alt=""></div>
+                                <div class="list-top"><img src="../assets/img/20771749_1609919623.jpeg" alt=""></div>
                                 <div class="list-btm">
                                     <h3>成都酒吧环境</h3>
                                     <p>联系人：周经理</p>
@@ -73,16 +74,37 @@
                 <p>成都夜总会，成都夜场，成都酒吧各种模特佳丽【13688143752】，设备齐全，装修高端，资源丰富，生意每天开到爆，欢迎随时预定包厢</p>
                 <div><a href="javascript:;">了解详细</a></div>
             </div>
+            <div class="model-box">
+                <div class="model">
+                    <h2>高端KTV夜总会模特</h2>
+                    <div></div>
+                    <ul>
+                        <li v-for="val in modelData" :key="val.id">
+                            <a href="javascript:;">
+                                <img :src="'http://49.235.93.38:82' + val.image" alt="">
+                                <p>{{val.title}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <my-foot></my-foot>
     </div>
 </template>
 <style lang="less" scoped>
 @import '../assets/css/base.css';
 .content {
     width: 100%;
+    // .bg {
+    //     // position: fixed;
+    //     width: 100%;
+    //     height: 100%;
+    //     background: url('../assets/img/banner-1.jpg') top center;
+    // }
     .banner {
         position: relative;
+        left: 0;
+        right: 0;
         width: 100%;
         .discounts {
             position: absolute;
@@ -261,18 +283,80 @@
             }
         }
     }
+    .model-box {
+        width: 100%;
+        height: 1230px;
+        background-color: rgb(225, 229, 232);
+        .model {
+            width: 1200px;
+            margin: 0 auto;
+            h2 {
+                padding: 52px 0 25px;
+                font-family: 微软雅黑;
+                font-size: 32px;
+                color: #333333;
+                line-height: 1.9;
+            }
+            div {
+                width: 36px;
+                height: 2px;
+                margin: 0 auto;
+                background-color: rgb(60, 181, 213);
+            }
+            ul {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                margin-top: 46px;
+                padding: 10px 0;
+                background-color: #fff;
+                li {
+                    margin: 0 10px;
+                    a {
+                        img {
+                            width: 300px;
+                            height: 400px;
+                        }
+                        p {
+                            line-height: 3;
+                            color: #444;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 </style>
 <script>
-import myHead from './Header'
-import myFoot from './Footer'
+// import VueMarkdown from 'vue-markdown'
 export default {
   data () {
-    return {}
+    return {
+        value: '',
+        modelData: []
+    }
   },
   components: {
-    myHead: myHead,
-    myFoot: myFoot
+    // VueMarkdown
+  },
+  mounted () {
+    this.$http.get('index.php/api/ambient/list?pageNumber=2&pageSize=3').then(res => {
+        // console.log(res)
+        // this.value = res.content
+    })
+    this.$http.get('index.php/api/carousel_map/list').then(res => {
+        // console.log(res[0].content)
+        // this.value = res[0].content
+    })
+    this.$http.get('index.php/api/models/list').then(res => {
+        this.modelData = res.filter((val, index) => index <= 5)
+    })
+    this.$http.get('index.php/api/ambient/get?id=4').then(res => {
+        console.log(res)
+    })
   }
 }
 </script>
