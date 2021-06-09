@@ -25,6 +25,7 @@ Axios.interceptors.response.use(function (res) {
   console.log(err)
 })
 Vue.prototype.$http = Axios
+Vue.prototype.imgUrl = 'http://49.235.93.38:82'
 
 new Vue({
   router,

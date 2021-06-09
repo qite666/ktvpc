@@ -1,4 +1,5 @@
 <template>
+<div class="box">
   <div class="top">
     <div class="logo">
       <img src="../assets/img/logo.png" alt="" />
@@ -8,12 +9,11 @@
         <li @click="current(0)" :class="{current:flag[0]}">
           <router-link to="/index">首页</router-link>
         </li>
-        <li @click="current(1)" :class="{current:flag[1]}">
+        <li @click="current(1),getAbout(0)" :class="{current:flag[1]}">
           <router-link to="/aboutus">关于我们</router-link>
         </li>
         <li @click="current(2)" :class="{current:flag[2]}">
           <router-link to="/modelshow">模特展示</router-link>
-          <!-- <a href="javascript:;"></a> -->
         </li>
         <li @click="current(3)" :class="{current:flag[3]}">
           <router-link to="/environmental">环境展示</router-link>
@@ -21,10 +21,10 @@
         <li @click="current(4)" :class="{current:flag[4]}">
           <router-link to="/journalism">夜场新闻</router-link>
         </li>
-        <li @click="current(5)" :class="{current:flag[5]}">
+        <li @click="current(5),getAbout(1)" :class="{current:flag[5]}">
           <router-link to="/aboutus">联系我们</router-link>
         </li>
-        <li @click="current(6)" :class="{current:flag[6]}">
+        <li @click="current(6),getAbout(2)" :class="{current:flag[6]}">
           <router-link to="/aboutus">招聘要求</router-link>
         </li>
       </ul>
@@ -36,9 +36,14 @@
       <img src="../assets/img/phone.png" alt="" />
     </div>
   </div>
+</div>
 </template>
 <style lang="less">
 @import "../assets/css/base.css";
+.box {
+  width: 100%;
+  background-color: #fff;
+}
 .top {
   display: flex;
   width: 1200px;
@@ -133,6 +138,10 @@ export default {
     current (index) {
       this.flag = [false, false, false, false, false, false, false]
       this.flag[index] = true
+    },
+    getAbout (num) {
+      this.$store.commit('getAbout', num)
+      // this.$router.push('/aboutus')
     }
   }
 }

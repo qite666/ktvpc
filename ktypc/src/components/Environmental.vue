@@ -13,7 +13,7 @@
         </div>
         <div class="navigation">
             <ul class="clearfix">
-                <li><a href="javascript:;">首页</a></li>
+                <li><router-link to="/index">首页</router-link></li>
                 <li>&gt;&gt;</li>
                 <li><a href="javascript:;">环境展示</a></li>
             </ul>
@@ -27,17 +27,25 @@
         </div>
         <div class="list">
              <ul class="clearfix">
-                <li v-for="val in listData" :key="val.id">
-                    <a href="javascript:;">
+                <li v-for="(val) in listData" :key="val.id">
+                    <router-link :to="'/environmentaldetails/' + val.id">
                         <div class="list-top">
                             <img :src="'http://49.235.93.38:82' + val.image" alt="">
                         </div>
                         <div class="list-btm">
                             <p>{{val.title}}</p>
                         </div>
-                    </a>
+                    </router-link>
                 </li>
             </ul>
+        </div>
+        <div class="right-fot">
+          <span>共有一页</span>
+          <span>首页</span>
+          <span>上一页</span>
+          <i>1</i>
+          <span>下一页</span>
+          <span>尾页</span>
         </div>
     </div>
 </template>
@@ -169,6 +177,35 @@
                 }
             }
         }
+    }
+    .right-fot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      span {
+        display: block;
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin-right: 5px;
+        padding: 0 10px;
+        cursor: not-allowed;
+      }
+      i {
+        display: block;
+        color: #fff;
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        text-align: center;
+        background-color: #2090ff;
+        border: 1px solid #2090ff;
+        margin-right: 5px;
+        padding: 0 10px;
+      }
     }
 }
 </style>

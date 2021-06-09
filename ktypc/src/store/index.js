@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    aboutus: 0
   },
   mutations: {
+    getAbout (state, num) {
+      state.aboutus = num
+    }
   },
   actions: {
   },

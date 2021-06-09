@@ -1,7 +1,7 @@
 <template>
     <div>
+        <div class="bg"></div>
         <div class="content">
-            <!-- <div class="bg"></div> -->
             <div class="banner">
                 <img src="../assets/img/image-10.jpg" alt="">
                 <div class="discounts">
@@ -88,6 +88,34 @@
                     </ul>
                 </div>
             </div>
+            <div class="journalism-box">
+                <div class="journalism">
+                    <h2>新闻咨询</h2>
+                    <p>T E A C H E R</p>
+                    <div class="border"></div>
+                    <div class="journalism-hd clearfix">
+                        <div class="journalism-lf">
+                            <img src="../assets/img/image-110.jpeg" alt="">
+                        </div>
+                        <div class="journalism-rt">
+                            <ul>
+                                <li v-for="val in journalism" :key="val.id">
+                                    <a href="javascript:;" class="clearfix">
+                                        <div class="img">
+                                            <img :src="'http://49.235.93.38:82' + val.image" alt="">
+                                        </div>
+                                        <div class="con">
+                                            <h2>{{val.title}}</h2>
+                                            <p>{{val.content}}</p>
+                                        </div>
+                                        <div class="date">{{val.time}}</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -95,12 +123,6 @@
 @import '../assets/css/base.css';
 .content {
     width: 100%;
-    // .bg {
-    //     // position: fixed;
-    //     width: 100%;
-    //     height: 100%;
-    //     background: url('../assets/img/banner-1.jpg') top center;
-    // }
     .banner {
         position: relative;
         left: 0;
@@ -328,6 +350,107 @@
             }
         }
     }
+    .journalism-box {
+        width: 100%;
+        background-color: #fff;
+    }
+    .journalism {
+        width: 1200px;
+        height: 860px;
+        margin: 0 auto;
+        &>h2 {
+            padding-top: 66px;
+            color: #212121;
+            font-size: 36px;
+            font-weight: 700;
+        }
+        &>p {
+            padding: 15px 0 8px;
+            color: #989898;
+            font-size: 18px;
+            line-height: 2;
+        }
+        .border {
+            width: 36px;
+            height: 2px;
+            margin: 0 auto;
+            background-color: rgb(60, 181, 213);
+        }
+        .journalism-hd {
+            width: 100%;
+            margin-top: 60px;
+            .journalism-lf {
+                float: left;
+                width: 433px;
+                height: 480px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .journalism-rt {
+                float: right;
+                width: 600px;
+                ul {
+                    li {
+                        margin-bottom: 20px;
+                        a {
+                            display: block;
+                            .img {
+                                float: left;
+                                width: 100px;
+                                height: 80px;
+                                border: 1px solid #ccc;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: hidden;
+                                img {
+                                    width: 100%;
+                                }
+                            }
+                            .con {
+                                float: left;
+                                width: 330px;
+                                margin-left: 40px;
+                                h2 {
+                                    font-size: 18px;
+                                    font-weight: 700;
+                                    color: rgb(102, 102, 102);
+                                    text-align: left;
+                                }
+                                p {
+                                    height: 80px;
+                                    font-size: 14px;
+                                    color: rgb(152, 152, 152);
+                                    line-height: 20px;
+                                    text-align: left;
+                                    text-indent: 2em;
+                                    overflow: hidden;
+                                }
+                            }
+                            .date {
+                                float: right;
+                                text-align: right;
+                                font-size: 14px;
+                                color: #989898;
+                                line-height: 2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1000px;
+    z-index: -1;
+    background: url('../assets/img/banner-1.jpg') top center;
 }
 </style>
 <script>
@@ -336,7 +459,8 @@ export default {
   data () {
     return {
         value: '',
-        modelData: []
+        modelData: [],
+        journalism: []
     }
   },
   components: {
@@ -355,7 +479,14 @@ export default {
         this.modelData = res.filter((val, index) => index <= 5)
     })
     this.$http.get('index.php/api/ambient/get?id=4').then(res => {
+        // console.log(res)
+    })
+    this.$http.get('/index.php/api/journalism/list').then(res => {
         console.log(res)
+        this.journalism = res
+        this.journalism.forEach(val => {
+            val.time = val.time.slice(0, 10)
+        })
     })
   }
 }

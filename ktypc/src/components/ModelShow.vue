@@ -1,5 +1,22 @@
 <template>
   <div>
+    <div class="banner">
+      <img src="../assets/img/image-10.jpg" alt="">
+      <div class="discounts">
+        <p>全场所有啤酒均可享受买二送一，还有更多豪礼等着你!</p>
+        <p>当晚本包间消费满6666以上，当晚可赠送豪华名宿酒店一套，限当天使用。</p>
+        <p>小包低消1080元 中包低消1280 大包低消1380 豪包低消2680</p>
+      </div>
+      <div class="qr-code"><img src="../assets/img/patrick.png" alt=""></div>
+      <div class="tel">T：13688143752</div>
+    </div>
+    <div class="navigation">
+      <ul class="clearfix">
+        <li><a href="javascript:;">首页</a></li>
+        <li>&gt;&gt;</li>
+        <li><a href="javascript:;">模特展示</a></li>
+      </ul>
+    </div>
     <div class="modshow-center">
       <div class="cent-left fl">
         <ul class="left-top">
@@ -22,59 +39,16 @@
         </div>
         <div class="right-center">
           <ul>
-            <li>
-              <div class="cent-img">
-                <img src="../assets/img/bell_1.jpg" alt="" />
-              </div>
-              <div class="cent-price">
-                <em>1500</em><span>元</span>
-              </div>
-              <h3>成都夜总会模特</h3>
-            </li>
-            <li>
-              <div class="cent-img2">
-                <img src="../assets/img/belle_2.jpg" alt="" />
-              </div>
-              <div class="cent-price">
-                <em>1500</em><span>元</span>
-              </div>
-              <h3>成都夜场模特</h3>
-            </li>
-            <li>
-              <div class="cent-img3">
-                <img src="../assets/img/belle_3.jpg" alt="" />
-              </div>
-              <div class="cent-price">
-                <em>1500</em><span>元</span>
-              </div>
-              <h3>成都酒吧模特</h3>
-            </li>
-            <li>
-              <div class="cent-img4">
-                <img src="../assets/img/belle_4.jpg" alt="" />
-              </div>
-              <div class="cent-price">
-                <em>1500</em><span>元</span>
-              </div>
-              <h3>成都夜总会模特</h3>
-            </li>
-            <li>
-              <div class="cent-img5">
-                <img src="../assets/img/belle_5.jpg" alt="" />
-              </div>
-              <div class="cent-price">
-                <em>1500</em><span>元</span>
-              </div>
-              <h3>成都夜场模特</h3>
-            </li>
-            <li>
-              <div class="cent-img6">
-                <img src="../assets/img/belle_6.jpg" alt="" />
-              </div>
-              <div class="cent-price">
-                <em>1500</em><span>元</span>
-              </div>
-              <h3>成都酒吧模特</h3>
+            <li v-for="val in modelData" :key="val.id">
+              <router-link to="/modelshow2">
+                <div class="cent-img">
+                  <img :src="imgUrl + val.image" alt="" />
+                </div>
+                <div class="cent-price">
+                  <em>{{val.price}}</em><span>元</span>
+                </div>
+                <h3>{{val.title}}</h3>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -91,6 +65,77 @@
   </div>
 </template>
 <style lang="less" scoped>
+.banner {
+  position: relative;
+  left: 0;
+  right: 0;
+  width: 100%;
+  .discounts {
+    position: absolute;
+    left: 50%;
+    top: 128px;
+    width: 803px;
+    height: 185px;
+    margin-left: -401.5px;
+    padding: 25px;
+    background-color: rgba(102, 0, 0, .7);
+    box-sizing: border-box;
+    p {
+      color: rgb(255, 255, 255);
+      font-size: 22px;
+      line-height: 2;
+      &:last-of-type {
+        margin-top: 10px;
+        font-weight: 400;
+        line-height: 1.3;
+        color: rgb(255, 255, 0);
+        font-size: 20px;
+      }
+    }
+  }
+  .qr-code {
+    position: absolute;
+    width: 134px;
+    height: 134px;
+    top: 408px;
+    left: 50%;
+    margin: -67px;
+  }
+  .tel {
+    position: absolute;
+    width: 135px;
+    height: 45px;
+    line-height: 45px;
+    left: 50%;
+    top: 556px;
+    margin: -67px;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+  }
+}
+.navigation {
+  width: 1200px;
+  margin: 0 auto;
+  ul {
+    margin: 10px 0 15px;
+    background-color: #f8f8f8;
+    padding-left: 5px;
+    li {
+      line-height: 1.8;
+      padding: 5px;
+      float: left;
+      font-size: 14px;
+      color: #2090FF;
+      a {
+        display: block;
+        color: #333333;
+      }
+    }
+  }
+}
 .modshow-center {
   width: 1210px;
   height: 672px;
@@ -201,62 +246,9 @@
             height: 200px;
             margin: 0 auto;
             border: 1px dashed #ccc;
+            overflow: hidden;
             img {
-              width: 160px;
-              height: 200px;
-            }
-          }
-          .cent-img2 {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            border: 1px dashed #ccc;
-            img {
-              width: 113px;
-              height: 200px;
-            }
-          }
-          .cent-img3 {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            border: 1px dashed #ccc;
-            img {
-              width: 162px;
-              height: 200px;
-            }
-          }
-          .cent-img4 {
-            width: 200px;
-            height: 200px;
-            line-height: 200px;
-            margin: auto;
-            border: 1px dashed #ccc;
-            img {
-              width: 200px;
-              height: 150px;
-            }
-          }
-          .cent-img5 {
-            width: 200px;
-            height: 200px;
-            line-height: 200px;
-            margin: 0 auto;
-            border: 1px dashed #ccc;
-            img {
-              width: 200px;
-              height: 162px;
-            }
-          }
-          .cent-img6 {
-            width: 200px;
-            height: 200px;
-            line-height: 200px;
-            margin: 0 auto;
-            border: 1px dashed #ccc;
-            img {
-              width: 200px;
-              height: 150px;
+              width: 100%;
             }
           }
           .cent-price{
@@ -305,6 +297,7 @@
         border: 1px solid #ddd;
         margin-right: 5px;
         padding: 0 10px;
+        cursor: not-allowed;
       }
       i {
         display: block;
@@ -326,8 +319,14 @@
 export default {
   data () {
     return {
-      msg: 1
+      msg: 1,
+      modelData: []
     }
+  },
+  mounted () {
+    this.$http.get('index.php/api/models/list').then(res => {
+        this.modelData = res.filter((val, index) => index <= 5)
+    })
   }
 }
 </script>

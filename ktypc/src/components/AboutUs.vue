@@ -17,6 +17,7 @@
           </ul>
         </div>
         <div class="center-right">
+          <h2>{{title}}</h2>
           <VueMarkdown :source="value"></VueMarkdown>
         </div>
       </div>
@@ -68,8 +69,18 @@
     .center-right{
       float: right;
       width: 948px;
+      padding: 0 20px;
       height: 827px;
       background-color: #fff;
+      box-sizing: border-box;
+      h2 {
+        line-height: 3;
+        margin-bottom: 20px;
+        font-size: 26px;
+        font-weight: 700;
+        text-align: left;
+        border-bottom: 1px solid #666;
+      }
     }
   }
 }
@@ -77,11 +88,13 @@
 <script>
 import VueMarkdown from 'vue-markdown'
 export default {
+  name: 'aboutus',
   data () {
     return {
         data: [],
         value: '',
-        flag: [true, false, false]
+        flag: [true, false, false],
+        title: ''
     }
   },
   components: {
@@ -92,13 +105,20 @@ export default {
       this.flag = [false, false, false]
       this.flag[index] = true
       this.value = this.data[index].content
+      this.title = this.data[index].title
     }
   },
   mounted () {
     this.$http.get('index.php/api/about_us/list').then(res => {
+      console.log(res)
       this.data = res
-      this.value = this.data[0].content
+      this.value = this.data[this.$store.state.aboutus].content
+      this.title = this.data[this.$store.state.aboutus].title
+      this.flag = [false, false, false]
+      this.flag[this.$store.state.aboutus] = true
+      // console.log(this.$store.state.aboutus)
     })
-  }
+  },
+  activated () {}
 }
 </script>

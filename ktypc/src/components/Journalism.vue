@@ -12,7 +12,7 @@
         </div>
         <div class="navigation">
             <ul class="clearfix">
-                <li><a href="javascript:;">首页</a></li>
+                <li><router-link to="/index">首页</router-link></li>
                 <li>&gt;&gt;</li>
                 <li><a href="javascript:;">夜场展示</a></li>
             </ul>
@@ -25,11 +25,18 @@
             <div class="joumalism-btm">
                 <h2>夜场新闻</h2>
                 <ul class="clearfix">
-                    <li v-for="val in listData" :key="val.id">
-                        <a href="javascript:;">{{val.title}}</a>
+                    <li v-for="(val,index) in listData" :key="val.id">
+                        <router-link :to="'/newsdetails/' + index">{{val.title}}</router-link>
                     </li>
                 </ul>
-                <div class="page-turner"></div>
+                <div class="page-turner">
+                    <span>共有一页</span>
+                    <span>首页</span>
+                    <span>上一页</span>
+                    <i>1</i>
+                    <span>下一页</span>
+                    <span>尾页</span>
+                </div>
             </div>
         </div>
     </div>
@@ -40,6 +47,7 @@
     width: 100%;
     border: 1px solid #f7f7f7;
     background-color: #f7f7f7;
+    box-sizing: border-box;
     .banner {
         position: relative;
         width: 100%;
@@ -118,7 +126,6 @@
             width: 100%;
             border-bottom: 1px solid #999;
             h2 {
-                width: 100%;
                 height: 32px;
                 line-height: 32px;
                 color: #2090FF;
@@ -139,7 +146,6 @@
         .joumalism-btm {
             width: 100%;
             h2 {
-                width: 100%;
                 height: 32px;
                 line-height: 32px;
                 color: #2090FF;
@@ -170,6 +176,36 @@
                 height: 50px;
             }
         }
+        .page-turner {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 818px;
+            height: 44px;
+            span {
+                display: block;
+                height: 24px;
+                line-height: 24px;
+                font-size: 12px;
+                text-align: center;
+                border: 1px solid #ddd;
+                margin-right: 5px;
+                padding: 0 10px;
+                cursor: not-allowed;
+            }
+            i {
+                display: block;
+                color: #fff;
+                height: 24px;
+                line-height: 24px;
+                font-size: 12px;
+                text-align: center;
+                background-color: #2090ff;
+                border: 1px solid #2090ff;
+                margin-right: 5px;
+                padding: 0 10px;
+            }
+        }
     }
 }
 </style>
@@ -182,7 +218,6 @@ export default {
   },
   mounted () {
     this.$http.get('/index.php/api/journalism/list').then(res => {
-        console.log(res)
         this.listData = res
     })
   }

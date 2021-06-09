@@ -1,7 +1,9 @@
 <template>
     <div>
         <my-head></my-head>
-        <router-view></router-view>
+        <keep-alive exclude="newsdetails,aboutus,environmentaldetails">
+            <router-view></router-view>
+        </keep-alive>
         <my-foot></my-foot>
     </div>
 </template>
