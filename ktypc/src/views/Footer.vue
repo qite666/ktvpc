@@ -4,22 +4,17 @@
       <div class="fot-top">
         <div class="left-center fl">
           <h2>锦缘国际夜总会</h2>
-          <span>
-            成都夜总会，成都夜场，成都酒吧各种模特佳丽【13688143752】，设备齐全，装修高端，资源丰富，生意每天开到爆，欢迎随时预定包厢
-          </span>
-          <span>咨询电话：13688143752</span>
-          <span>公司地址：高端夜场夜总会</span>
+          <span>{{describe}}</span>
+          <span>咨询电话：{{phone}}</span>
+          <span>公司地址：{{address}}</span>
         </div>
         <div class="left-code fr">
-          <img src="../assets/img/patrick.png" alt="" />
+          <img :src="imgUrl + image" alt="" />
           <span>关注加好友更优惠</span>
         </div>
       </div>
       <div class="fot-bot">
-        <p>
-          Copyright @ 2021. All rights reserved.高端夜场夜总会 版权所有.
-          京ICP备11058096号
-        </p>
+        <p>{{record}}</p>
       </div>
     </div>
   </div>
@@ -119,3 +114,28 @@
   }
 }
 </style>
+<script>
+export default {
+  data () {
+    return {
+      phone: '',
+      describe: '',
+      record: '',
+      address: '',
+      image: ''
+    }
+  },
+  mounted () {
+    this.$http.get('index.php/api/footer/get').then(res => {
+      if (res) {
+        console.log(res)
+        this.phone = res.phone
+        this.describe = res.describe
+        this.record = res.record
+        this.address = res.address
+        this.image = res.image
+      }
+    })
+  }
+}
+</script>

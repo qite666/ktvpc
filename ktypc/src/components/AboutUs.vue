@@ -110,12 +110,9 @@ export default {
   },
   mounted () {
     this.$http.get('index.php/api/about_us/list').then(res => {
-      console.log(res)
       this.data = res
       this.value = this.data[this.$store.state.aboutus].content
       this.title = this.data[this.$store.state.aboutus].title
-      this.flag = [false, false, false]
-      this.flag[this.$store.state.aboutus] = true
       // console.log(this.$store.state.aboutus)
     })
   },

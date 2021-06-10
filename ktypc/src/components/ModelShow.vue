@@ -1,11 +1,9 @@
 <template>
   <div>
     <div class="banner">
-      <img src="../assets/img/image-10.jpg" alt="">
+      <img :src="imgUrl + bannerImg" alt="">
       <div class="discounts">
-        <p>全场所有啤酒均可享受买二送一，还有更多豪礼等着你!</p>
-        <p>当晚本包间消费满6666以上，当晚可赠送豪华名宿酒店一套，限当天使用。</p>
-        <p>小包低消1080元 中包低消1280 大包低消1380 豪包低消2680</p>
+        <VueMarkdown :source="value"></VueMarkdown>
       </div>
       <div class="qr-code"><img src="../assets/img/patrick.png" alt=""></div>
       <div class="tel">T：13688143752</div>
@@ -40,7 +38,7 @@
         <div class="right-center">
           <ul>
             <li v-for="val in modelData" :key="val.id">
-              <router-link to="/modelshow2">
+              <router-link :to="/modelshow2/ + val.id">
                 <div class="cent-img">
                   <img :src="imgUrl + val.image" alt="" />
                 </div>
@@ -316,14 +314,25 @@
 }
 </style>
 <script>
+import VueMarkdown from 'vue-markdown'
 export default {
   data () {
     return {
       msg: 1,
-      modelData: []
+      modelData: [],
+      value: '',
+      bannerImg: ''
     }
   },
+  components: {
+    VueMarkdown
+  },
   mounted () {
+    // 轮播图
+    this.$http.get('index.php/api/carousel_map/list').then(res => {
+        this.value = res[0].content
+        this.bannerImg = res[0].image
+    })
     this.$http.get('index.php/api/models/list').then(res => {
         this.modelData = res.filter((val, index) => index <= 5)
     })

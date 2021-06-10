@@ -54,7 +54,7 @@ const routes = [
         component: () => import('../components/EnvironmentalDetails.vue')
       },
       {
-        path: '/modelshow2',
+        path: '/modelshow2/:id',
         name: 'ModelShow2',
         component: () => import('../components/ModelShow2.vue')
       }

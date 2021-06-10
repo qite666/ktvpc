@@ -1,11 +1,9 @@
 <template>
     <div class="content">
         <div class="banner">
-            <img src="../assets/img/image-10.jpg" alt="">
+            <img :src="imgUrl + bannerImg" alt="">
             <div class="discounts">
-                <p>全场所有啤酒均可享受买二送一，还有更多豪礼等着你!</p>
-                <p>当晚本包间消费满6666以上，当晚可赠送豪华名宿酒店一套，限当天使用。</p>
-                <p>小包低消1080元 中包低消1280 大包低消1380 豪包低消2680</p>
+                <VueMarkdown :source="value2"></VueMarkdown>
             </div>
             <div class="qr-code"><img src="../assets/img/patrick.png" alt=""></div>
             <div class="tel">T：13688143752</div>
@@ -16,7 +14,7 @@
                 <ul class="clearfix">
                     <li><router-link to="/index">首页</router-link></li>
                     <li>&gt;&gt;</li>
-                    <li><router-link to="/journalism">夜场新闻</router-link></li>
+                    <li><router-link to="/journalism">环境展示</router-link></li>
                     <li>&gt;&gt;</li>
                     <li><a href="javascript:;">{{title}}</a></li>
                 </ul>
@@ -25,7 +23,7 @@
                 <div class="center-left fl">
                     <ul>
                         <li>
-                            <a href="javascript:;" class="eart">成都夜场</a>
+                            <a href="javascript:;" class="eart">{{name}}</a>
                         </li>
                     </ul>
                 </div>
@@ -209,8 +207,11 @@ export default {
     return {
         data: [],
         value: '',
+        value2: '',
         title: '',
-        index: 0
+        index: 0,
+        name: '',
+        bannerImg: ''
     }
   },
   components: {
@@ -222,14 +223,22 @@ export default {
           this.index = parseInt(this.index)
           this.value = this.data[this.index].content
           this.title = this.data[this.index].title
+          this.name = this.data[this.index].name
       }
   },
   mounted () {
     this.index = parseInt(this.$route.params.id)
     this.$http.get('/index.php/api/journalism/list').then(res => {
       this.data = res
+      console.log(this.data)
       this.value = this.data[this.index].content
       this.title = this.data[this.index].title
+      this.name = this.data[this.index].name
+    })
+    // 轮播图
+    this.$http.get('index.php/api/carousel_map/list').then(res => {
+        this.value2 = res[0].content
+        this.bannerImg = res[0].image
     })
   }
 }

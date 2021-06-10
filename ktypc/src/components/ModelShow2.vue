@@ -124,7 +124,7 @@
           </div>
           <div class="levo">
             <div class="levoimg" ref="levoimg" @mousemove="move">
-              <img src="../assets/img/img1.jpg" alt="">
+              <img :src="imgUrl + img" alt="">
               <div class="levomask" ref="levomask" :style="{top: levomaskY + 'px', left: levomaskX + 'px'}"></div>
               <div class="levo-collect">
                 <div class="levo-coltwo">
@@ -133,7 +133,7 @@
                 </div>
               </div>
               <div class="levodiv" ref="levodiv">
-                <img src="../assets/img/img1.jpg" :style="{top: imgY + 'px', left: imgX + 'px'}" ref="img">
+                <img :src="imgUrl + img" :style="{top: imgY + 'px', left: imgX + 'px'}" ref="img">
               </div>
             </div>
             <div class="levo-icon">
@@ -158,7 +158,7 @@
             <li></li>
           </ul>
           <div class="description-img">
-            <img src="../assets/img/bell_1.jpg" alt="" />
+            <img :src="imgUrl + img" alt="" />
           </div>
         </div>
         <div class="related">
@@ -166,55 +166,19 @@
             <p>相关产品</p>
           </div>
           <div class="related-center">
-            <div class="related-r-dw"></div>
-            <ul>
-              <li>
-                <div class="related-img1">
-                  <img src="../assets/img/belle_2.jpg" alt="" />
+            <div class="related-r-dw" @click="shift('you')"></div>
+            <ul :style="{left:left + 'px'}">
+              <li v-for="val in relatedData" :key="val.id" @click="getData(val.id)">
+                <div class="related-img">
+                  <img :src="imgUrl + val.image" alt="" />
                 </div>
                 <div class="related-price">
-                  <p>1500元</p>
+                  <p>{{val.price}}元</p>
                 </div>
-                <h3>成都夜场模特</h3>
-              </li>
-              <li>
-                <div class="related-img2">
-                  <img src="../assets/img/belle_3.jpg" alt="" />
-                </div>
-                <div class="related-price">
-                  <p>1500元</p>
-                </div>
-                <h3>成都酒吧模特</h3>
-              </li>
-              <li>
-                <div class="related-img3">
-                  <img src="../assets/img/belle_4.jpg" alt="" />
-                </div>
-                <div class="related-price">
-                  <p>1500元</p>
-                </div>
-                <h3>成都夜总会模特</h3>
-              </li>
-              <li>
-                <div class="related-img4">
-                  <img src="../assets/img/belle_5.jpg" alt="" />
-                </div>
-                <div class="related-price">
-                  <p>1500元</p>
-                </div>
-                <h3>成都夜场模特</h3>
-              </li>
-              <li>
-                <div class="related-img5">
-                  <img src="../assets/img/belle_6.jpg" alt="" />
-                </div>
-                <div class="related-price">
-                  <p>1500元</p>
-                </div>
-                <h3>成都酒吧模特</h3>
+                <h3>{{val.title}}</h3>
               </li>
             </ul>
-            <div class="related-l-dw"></div>
+            <div class="related-l-dw" @click="shift('zuo')"></div>
           </div>
         </div>
       </div>
@@ -681,7 +645,7 @@
           text-align: center;
           border: 1px solid #3b5fcb;
           img {
-            width: 336px;
+            width: auto;
             height: 100%;
           }
           .levomask {
@@ -739,8 +703,8 @@
               position: absolute;
               top: 0;
               left: 0;
-              width: 1080px;
-              height: 1050px;
+              width: 200%;
+              height: auto;
             }
           }
           &:hover{
@@ -845,10 +809,11 @@
         width: 804px;
         height: 1100px;
         margin: 10px auto 0;
-        overflow-y: hidden;
+        overflow: auto;
+        text-align: left;
         img {
-          width: 860px;
-          height: 1075px;
+          width: 100%;
+          height: auto;
         }
       }
     }
@@ -884,6 +849,7 @@
           height: 56px;
           display: none;
           background: url("../assets/img/manual_move_btn.png") 0 0;
+          z-index: 5;
         }
         .related-l-dw {
           position: absolute;
@@ -898,15 +864,16 @@
           position: absolute;
           top: 0;
           left: 0;
-          width: 1130px;
+          width: 1600px;
           height: 273px;
           margin-top: 15px;
+          transform: left 1s;
           li {
             float: left;
             width: 202px;
             height: 252px;
             margin-right: 20px;
-            .related-img1 {
+            .related-img {
               width: 200px;
               height: 200px;
               cursor: pointer;
@@ -916,64 +883,8 @@
                 border-color: #2090ff;
               }
               img {
-                width: 113px;
-                height: 200px;
-              }
-            }
-            .related-img2 {
-              width: 200px;
-              height: 200px;
-              cursor: pointer;
-              text-align: center;
-              border: 1px solid #ccc;
-              &:hover {
-                border-color: #2090ff;
-              }
-              img {
-                width: 162px;
-                height: 200px;
-              }
-            }
-            .related-img3 {
-              width: 200px;
-              height: 200px;
-              cursor: pointer;
-              line-height: 200px;
-              border: 1px solid #ccc;
-              &:hover {
-                border-color: #2090ff;
-              }
-              img {
-                width: 200px;
-                height: 150px;
-              }
-            }
-            .related-img4 {
-              width: 200px;
-              height: 200px;
-              cursor: pointer;
-              line-height: 200px;
-              border: 1px solid #ccc;
-              &:hover {
-                border-color: #2090ff;
-              }
-              img {
-                width: 162px;
-                height: 199px;
-              }
-            }
-            .related-img5 {
-              width: 200px;
-              height: 200px;
-              cursor: pointer;
-              line-height: 200px;
-              border: 1px solid #ccc;
-              &:hover {
-                border-color: #2090ff;
-              }
-              img {
-                width: 150px;
-                height: 200px;
+                width: 100%;
+                height: 100%;
               }
             }
             .related-price {
@@ -1021,33 +932,88 @@ export default {
             levomaskX: 0,
             levomaskY: 0,
             imgX: 0,
-            imgY: 0
+            imgY: 0,
+            id: 0,
+            data: [],
+            img: '',
+            title: '',
+            relatedData: [],
+            left: 0,
+            flag: true
         }
     },
     methods: {
-          move (event) {
-            var mouseX = event.pageX - this.$refs.levoimg.offsetLeft
-            var mouseY = event.pageY - this.$refs.levoimg.offsetTop
-            console.log(this.$refs.levoimg.offsetLeft)
-            this.levomaskX = mouseX - this.$refs.levomask.offsetWidth / 2
-            this.levomaskY = mouseY - this.$refs.levomask.offsetHeight / 2
-            var maxX = this.$refs.levoimg.offsetWidth - this.$refs.levomask.offsetWidth
-            var maxY = this.$refs.levoimg.offsetHeight - this.$refs.levomask.offsetHeight
-            var maxBigX = this.$refs.img.offsetWidth - this.$refs.levodiv.offsetWidth
-            var maxBigY = this.$refs.img.offsetHeight - this.$refs.levodiv.offsetHeight
-            if (this.levomaskX > maxX) {
-                this.levomaskX = maxX
-            } else if (this.levomaskX < 0) {
-                this.levomaskX = 0
-            }
-            if (this.levomaskY > maxY) {
-                this.levomaskY = maxY
-            } else if (this.levomaskY < 0) {
-                this.levomaskY = 0
-            }
-            this.imgX = -maxBigX / maxX * this.levomaskX
-            this.imgY = -maxBigY / maxY * this.levomaskY
+      move (event) {
+        var mouseX = event.pageX - this.$refs.levoimg.offsetLeft
+        var mouseY = event.pageY - this.$refs.levoimg.offsetTop
+        this.levomaskX = mouseX - this.$refs.levomask.offsetWidth / 2
+        this.levomaskY = mouseY - this.$refs.levomask.offsetHeight / 2
+        var maxX = this.$refs.levoimg.offsetWidth - this.$refs.levomask.offsetWidth
+        var maxY = this.$refs.levoimg.offsetHeight - this.$refs.levomask.offsetHeight
+        var maxBigX = this.$refs.img.offsetWidth - this.$refs.levodiv.offsetWidth
+        var maxBigY = this.$refs.img.offsetHeight - this.$refs.levodiv.offsetHeight
+        if (this.levomaskX > maxX) {
+            this.levomaskX = maxX
+        } else if (this.levomaskX < 0) {
+            this.levomaskX = 0
         }
+        if (this.levomaskY > maxY) {
+            this.levomaskY = maxY
+        } else if (this.levomaskY < 0) {
+            this.levomaskY = 0
+        }
+        this.imgX = -maxBigX / maxX * this.levomaskX
+        this.imgY = -maxBigY / maxY * this.levomaskY
+      },
+      getData (id) {
+        this.id = id
+        this.id = parseInt(this.id)
+        var index = this.data.findIndex(val => this.id === val.id)
+        this.img = this.data[index].image
+        this.title = this.data[index].title
+        this.relatedData = this.data.filter((val, index) => this.id !== val.id)
+      },
+      shift (val) {
+        if (this.flag) {
+          if (val === 'zuo') {
+            if (this.relatedData.length * 222 - 796 + this.left > 0) {
+              this.flag = false
+              var num = 0
+              var timer = setInterval(() => {
+                num++
+                this.left -= 1
+                if (num === 222) {
+                  this.flag = true
+                  clearInterval(timer)
+                }
+              }, 1)
+            }
+          } else if (val === 'you') {
+            if (this.left < 0) {
+              this.flag = false
+              var num2 = 0
+              var timer2 = setInterval(() => {
+                num2++
+                this.left += 1
+                if (num2 === 222) {
+                  this.flag = true
+                  clearInterval(timer2)
+                }
+              }, 1)
+            }
+          }
+        }
+      }
+    },
+    mounted () {
+        this.id = parseInt(this.$route.params.id)
+        this.$http.get('index.php/api/models/list').then(res => {
+            this.data = res
+            this.relatedData = this.data.filter((val, index) => this.id !== val.id)
+            var index = this.data.findIndex(val => this.id === val.id)
+            this.img = this.data[index].image
+            this.title = this.data[index].title
+        })
     }
 }
 </script>

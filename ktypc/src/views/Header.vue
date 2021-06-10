@@ -6,25 +6,25 @@
     </div>
     <div class="tab">
       <ul>
-        <li @click="current(0)" :class="{current:flag[0]}">
+        <li @click="current(0)" :class="{current:$store.state.flag[0]}">
           <router-link to="/index">首页</router-link>
         </li>
-        <li @click="current(1),getAbout(0)" :class="{current:flag[1]}">
+        <li @click="current(1),getAbout(0)" :class="{current:$store.state.flag[1]}">
           <router-link to="/aboutus">关于我们</router-link>
         </li>
-        <li @click="current(2)" :class="{current:flag[2]}">
+        <li @click="current(2)" :class="{current:$store.state.flag[2]}">
           <router-link to="/modelshow">模特展示</router-link>
         </li>
-        <li @click="current(3)" :class="{current:flag[3]}">
+        <li @click="current(3)" :class="{current:$store.state.flag[3]}">
           <router-link to="/environmental">环境展示</router-link>
         </li>
-        <li @click="current(4)" :class="{current:flag[4]}">
+        <li @click="current(4)" :class="{current:$store.state.flag[4]}">
           <router-link to="/journalism">夜场新闻</router-link>
         </li>
-        <li @click="current(5),getAbout(1)" :class="{current:flag[5]}">
+        <li @click="current(5),getAbout(1)" :class="{current:$store.state.flag[5]}">
           <router-link to="/aboutus">联系我们</router-link>
         </li>
-        <li @click="current(6),getAbout(2)" :class="{current:flag[6]}">
+        <li @click="current(6),getAbout(2)" :class="{current:$store.state.flag[6]}">
           <router-link to="/aboutus">招聘要求</router-link>
         </li>
       </ul>
@@ -130,18 +130,16 @@
 <script>
 export default {
   data () {
-    return {
-        flag: [true, false, false, false, false, false, false]
-    }
+    return {}
   },
   methods: {
     current (index) {
-      this.flag = [false, false, false, false, false, false, false]
-      this.flag[index] = true
+      var arr = [false, false, false, false, false, false, false]
+      arr[index] = true
+      this.$store.commit('getflag', arr)
     },
     getAbout (num) {
       this.$store.commit('getAbout', num)
-      // this.$router.push('/aboutus')
     }
   }
 }

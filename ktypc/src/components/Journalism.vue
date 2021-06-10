@@ -1,11 +1,9 @@
 <template>
     <div class="content">
         <div class="banner">
-            <img src="../assets/img/image-10.jpg" alt="">
+            <img :src="imgUrl + bannerImg" alt="">
             <div class="discounts">
-                <p>全场所有啤酒均可享受买二送一，还有更多豪礼等着你!</p>
-                <p>当晚本包间消费满6666以上，当晚可赠送豪华名宿酒店一套，限当天使用。</p>
-                <p>小包低消1080元 中包低消1280 大包低消1380 豪包低消2680</p>
+                <VueMarkdown :source="value"></VueMarkdown>
             </div>
             <div class="qr-code"><img src="../assets/img/patrick.png" alt=""></div>
             <div class="tel">T：13688143752</div>
@@ -20,7 +18,9 @@
         <div class="joumalism">
             <div class="joumalism-top">
                 <h2>夜场新闻</h2>
-                <p>成都夜场</p>
+                <ul class="clearfix">
+                    <li v-for="val in type" :key="val.name" @click="gettype(val.id)">{{val.name}}</li>
+                </ul>
             </div>
             <div class="joumalism-btm">
                 <h2>夜场新闻</h2>
@@ -120,7 +120,6 @@
     .joumalism {
         width: 1200px;
         margin: 0 auto 120px;
-        // padding: 120px;
         border: 1px solid #999;
         .joumalism-top {
             width: 100%;
@@ -135,12 +134,16 @@
                 background: url('../assets/img/MoHead_Bg.png') no-repeat 7px center;
                 padding-left: 14px;
             }
-            p {
+            ul {
                 height: 50px;
                 line-height: 50px;
                 padding-left: 14px;
                 font-size: 14px;
                 text-align: left;
+                li {
+                    float: left;
+                    padding: 0 10px;
+                }
             }
         }
         .joumalism-btm {
@@ -210,15 +213,39 @@
 }
 </style>
 <script>
+import VueMarkdown from 'vue-markdown'
 export default {
   data () {
     return {
-        listData: []
+        listData: [],
+        value: '',
+        bannerImg: '',
+        type: []
+    }
+  },
+  components: {
+    VueMarkdown
+  },
+  methods: {
+    gettype (id) {
+      this.$http.get('/index.php/api/journalism/list?pageNumber=1&pageSize=21&journalismtypeid=' + id).then(res => {
+          console.log(res)
+        this.listData = res
+      })
     }
   },
   mounted () {
     this.$http.get('/index.php/api/journalism/list').then(res => {
         this.listData = res
+    })
+    // 轮播图
+    this.$http.get('index.php/api/carousel_map/list').then(res => {
+        this.value = res[0].content
+        this.bannerImg = res[0].image
+    })
+    this.$http.get('/index.php/api/journalismtype/list').then(res => {
+        console.log(res)
+        this.type = res
     })
   }
 }

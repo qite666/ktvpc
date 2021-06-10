@@ -3,12 +3,9 @@
         <div class="bg"></div>
         <div class="content">
             <div class="banner">
-                <img src="../assets/img/image-10.jpg" alt="">
+                <img :src="imgUrl + bannerImg" alt="">
                 <div class="discounts">
-                    <!-- <VueMarkdown :source="value"></VueMarkdown> -->
-                    <p>全场所有啤酒均可享受买二送一，还有更多豪礼等着你!</p>
-                    <p>当晚本包间消费满6666以上，当晚可赠送豪华名宿酒店一套，限当天使用。</p>
-                    <p>小包低消1080元 中包低消1280 大包低消1380 豪包低消2680</p>
+                    <VueMarkdown :source="value"></VueMarkdown>
                 </div>
                 <div class="qr-code"><img src="../assets/img/patrick.png" alt=""></div>
                 <div class="tel">T：13688143752</div>
@@ -19,60 +16,30 @@
                     <p>环境/AMBIENT</p>
                     <div class="border"></div>
                     <ul class="clearfix">
-                        <li>
+                        <li v-for="val in environmental" :key="val.image">
                             <a href="javascript:;">
-                                <div class="list-top"><img src="../assets/img/14455970_1563958962.jpg" alt=""></div>
+                                <div class="list-top"><img :src="imgUrl + val.image" alt=""></div>
                                 <div class="list-btm">
-                                    <h3>成都夜总会环境</h3>
-                                    <p>联系人：周经理</p>
-                                    <p>手 机：13688143752（微信同号）</p>
+                                    <h3>{{val.title}}</h3>
+                                    <p>联系人：{{val.contacts}}</p>
+                                    <p>手 机：{{val.phone}}</p>
                                     <p>地 址：成都</p>
                                     <div class="list-btm-btm">
                                         <div><img src="../assets/img/7936683_1538965745.png" alt=""><span>：夜场模特</span></div>
-                                        <div><img src="../assets/img/7936704_1538965778.png" alt=""><span>：1203人</span></div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <div class="list-top"><img src="../assets/img/20771746_1609919598.jpeg" alt=""></div>
-                                <div class="list-btm">
-                                    <h3>成都夜场环境</h3>
-                                    <p>联系人：周经理</p>
-                                    <p>手 机：13688143752（微信同号）</p>
-                                    <p>地 址：成都</p>
-                                    <div class="list-btm-btm">
-                                        <div><img src="../assets/img/7936683_1538965745.png" alt=""><span>：夜场模特</span></div>
-                                        <div><img src="../assets/img/7936704_1538965778.png" alt=""><span>：1203人</span></div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <div class="list-top"><img src="../assets/img/20771749_1609919623.jpeg" alt=""></div>
-                                <div class="list-btm">
-                                    <h3>成都酒吧环境</h3>
-                                    <p>联系人：周经理</p>
-                                    <p>手 机：13688143752（微信同号）</p>
-                                    <p>地 址：成都</p>
-                                    <div class="list-btm-btm">
-                                        <div><img src="../assets/img/7936683_1538965745.png" alt=""><span>：夜场模特</span></div>
-                                        <div><img src="../assets/img/7936704_1538965778.png" alt=""><span>：1203人</span></div>
+                                        <div><img src="../assets/img/7936704_1538965778.png" alt=""><span>：{{val.frequency}}人</span></div>
                                     </div>
                                 </div>
                             </a>
                         </li>
                     </ul>
-                    <div class="more"><a href="javascript:;">查看更多</a></div>
+                    <div class="more"><router-link to="/environmental">查看更多</router-link></div>
                 </div>
             </div>
             <div class="about">
                 <h3>关于/ABOUT</h3>
                 <h2>锦缘国际夜总会</h2>
                 <p>成都夜总会，成都夜场，成都酒吧各种模特佳丽【13688143752】，设备齐全，装修高端，资源丰富，生意每天开到爆，欢迎随时预定包厢</p>
-                <div><a href="javascript:;">了解详细</a></div>
+                <div><router-link to="/aboutus">了解详细</router-link></div>
             </div>
             <div class="model-box">
                 <div class="model">
@@ -80,10 +47,10 @@
                     <div></div>
                     <ul>
                         <li v-for="val in modelData" :key="val.id">
-                            <a href="javascript:;">
-                                <img :src="'http://49.235.93.38:82' + val.image" alt="">
+                            <router-link :to="'/modelshow2/' + val.id">
+                                <img :src="imgUrl + val.image" alt="">
                                 <p>{{val.title}}</p>
-                            </a>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -100,16 +67,16 @@
                         <div class="journalism-rt">
                             <ul>
                                 <li v-for="val in journalism" :key="val.id">
-                                    <a href="javascript:;" class="clearfix">
+                                    <router-link :to="'/environmentaldetails/' + val.id">
                                         <div class="img">
-                                            <img :src="'http://49.235.93.38:82' + val.image" alt="">
+                                            <img :src="imgUrl + val.image" alt="">
                                         </div>
                                         <div class="con">
                                             <h2>{{val.title}}</h2>
                                             <p>{{val.content}}</p>
                                         </div>
                                         <div class="date">{{val.time}}</div>
-                                    </a>
+                                    </router-link>
                                 </li>
                             </ul>
                         </div>
@@ -219,6 +186,12 @@
                             overflow: hidden;
                             img {
                                 width: 100%;
+                                transition: all 0.5s;
+                            }
+                            &:hover {
+                                img {
+                                    transform: scale(1.1);
+                                }
                             }
                         }
                         .list-btm {
@@ -336,6 +309,7 @@
                 li {
                     margin: 0 10px;
                     a {
+                        display: block;
                         img {
                             width: 300px;
                             height: 400px;
@@ -393,8 +367,11 @@
                 width: 600px;
                 ul {
                     li {
+                        width: 600px;
                         margin-bottom: 20px;
                         a {
+                            width: 600px;
+                            height: 100px;
                             display: block;
                             .img {
                                 float: left;
@@ -454,26 +431,30 @@
 }
 </style>
 <script>
-// import VueMarkdown from 'vue-markdown'
+import VueMarkdown from 'vue-markdown'
 export default {
   data () {
     return {
         value: '',
         modelData: [],
-        journalism: []
+        journalism: [],
+        bannerImg: '',
+        environmental: []
     }
   },
   components: {
-    // VueMarkdown
+    VueMarkdown
   },
   mounted () {
-    this.$http.get('index.php/api/ambient/list?pageNumber=2&pageSize=3').then(res => {
-        // console.log(res)
-        // this.value = res.content
+    this.$http.get('index.php/api/ambient/list').then(res => {
+        if (res) {
+            this.environmental = res.filter((val, index) => val.id <= 3)
+        }
     })
+    // 轮播图
     this.$http.get('index.php/api/carousel_map/list').then(res => {
-        // console.log(res[0].content)
-        // this.value = res[0].content
+        this.value = res[0].content
+        this.bannerImg = res[0].image
     })
     this.$http.get('index.php/api/models/list').then(res => {
         this.modelData = res.filter((val, index) => index <= 5)
@@ -482,7 +463,7 @@ export default {
         // console.log(res)
     })
     this.$http.get('/index.php/api/journalism/list').then(res => {
-        console.log(res)
+        // console.log(res)
         this.journalism = res
         this.journalism.forEach(val => {
             val.time = val.time.slice(0, 10)

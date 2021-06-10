@@ -1,12 +1,9 @@
 <template>
     <div class="content">
         <div class="banner">
-            <img src="../assets/img/image-10.jpg" alt="">
+            <img :src="imgUrl + bannerImg" alt="">
             <div class="discounts">
-                <!-- <VueMarkdown :source="value"></VueMarkdown> -->
-                <p>全场所有啤酒均可享受买二送一，还有更多豪礼等着你!</p>
-                <p>当晚本包间消费满6666以上，当晚可赠送豪华名宿酒店一套，限当天使用。</p>
-                <p>小包低消1080元 中包低消1280 大包低消1380 豪包低消2680</p>
+                <VueMarkdown :source="value"></VueMarkdown>
             </div>
             <div class="qr-code"><img src="../assets/img/patrick.png" alt=""></div>
             <div class="tel">T：13688143752</div>
@@ -163,7 +160,7 @@
                         height: 280px;
                         overflow: hidden;
                         img {
-                            line-height: 280px;
+                            height: 100%;
                             width: 100%;
                         }
                     }
@@ -210,16 +207,27 @@
 }
 </style>
 <script>
+import VueMarkdown from 'vue-markdown'
 export default {
   data () {
     return {
-        listData: []
+        listData: [],
+        value: '',
+        bannerImg: ''
     }
+  },
+  components: {
+    VueMarkdown
   },
   mounted () {
     this.$http.get('index.php/api/ambient/list').then(res => {
         console.log(res)
         this.listData = res
+    })
+    // 轮播图
+    this.$http.get('index.php/api/carousel_map/list').then(res => {
+        this.value = res[0].content
+        this.bannerImg = res[0].image
     })
   }
 }
