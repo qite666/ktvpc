@@ -9,7 +9,7 @@
           </ul>
         </div>
         <div class="wxfx-bot">
-          <img src="../assets/img/barCode.jpg" alt="">
+          <img src="../assets/img/barCode.jpg" alt="" />
         </div>
       </div>
       <div class="details-l fl">
@@ -123,16 +123,18 @@
             </div>
           </div>
           <div class="levo">
-            <div class="levo-img">
-              <img src="../assets/img/img1.jpg" alt="" />
-              <div class="levo-mask"></div>
+            <div class="levoimg" ref="levoimg" @mousemove="move">
+              <img src="../assets/img/img1.jpg" alt="">
+              <div class="levomask" ref="levomask" :style="{top: levomaskY + 'px', left: levomaskX + 'px'}"></div>
               <div class="levo-collect">
                 <div class="levo-coltwo">
                   <i></i>
                   <span>收藏</span>
                 </div>
               </div>
-              <div class="levo-div"></div>
+              <div class="levodiv" ref="levodiv">
+                <img src="../assets/img/img1.jpg" :style="{top: imgY + 'px', left: imgX + 'px'}" ref="img">
+              </div>
             </div>
             <div class="levo-icon">
               <a href=""></a>
@@ -156,7 +158,7 @@
             <li></li>
           </ul>
           <div class="description-img">
-            <img src="../assets/img/bell_1.jpg" alt="">
+            <img src="../assets/img/bell_1.jpg" alt="" />
           </div>
         </div>
         <div class="related">
@@ -224,7 +226,7 @@
   width: 1210px;
   height: 2018px;
   margin: 10px auto 10px;
-  .wxfx{
+  .wxfx {
     display: none;
     left: 50%;
     top: 50%;
@@ -237,23 +239,23 @@
     border: 5px solid #888;
     border-radius: 5px;
     background-color: #fff;
-    .wxfx-top{
+    .wxfx-top {
       width: 100%;
       height: 25px;
       background-color: #f2f2f2;
-      ul{
+      ul {
         width: 100%;
         height: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        li{
+        li {
           font-size: 12px;
           color: #666;
-          &:nth-of-type(1){
+          &:nth-of-type(1) {
             margin-left: 15px;
           }
-          &:nth-of-type(2){
+          &:nth-of-type(2) {
             font-weight: 700;
             margin-right: 10px;
             font-size: 14px;
@@ -261,12 +263,12 @@
         }
       }
     }
-    .wxfx-bot{
+    .wxfx-bot {
       width: 220px;
       height: 220px;
       line-height: 220px;
       text-align: center;
-      img{
+      img {
         width: 178px;
         height: 178px;
       }
@@ -335,7 +337,6 @@
       }
     }
     .r-magnifyingglass {
-      position: relative;
       width: 818px;
       height: 467px;
       margin: 5px;
@@ -673,7 +674,7 @@
       .levo {
         width: 420px;
         height: 467px;
-        .levo-img {
+        .levoimg {
           position: relative;
           width: 418px;
           height: 420px;
@@ -683,12 +684,14 @@
             width: 336px;
             height: 100%;
           }
-          .levo-mask {
+          .levomask {
+            display: none;
             position: absolute;
+            top: 0;
+            left: 0;
             z-index: 2;
             width: 175px;
             height: 175px;
-            display: none;
             background-color: #fc980f;
             opacity: 0.5;
             cursor: move;
@@ -697,10 +700,12 @@
             display: none;
             position: absolute;
             bottom: 8%;
-            right: 0;
+            right: -100px;
             z-index: 100;
             width: 74px;
             height: 32px;
+            transform: translate(-100px, 0);
+            transition: all ease .2s;
             background: url("../assets/img/icon1.png") 0 0;
             .levo-coltwo {
               display: flex;
@@ -721,12 +726,29 @@
               }
             }
           }
-          .levo-div {
+          .levodiv {
+            display: none;
             position: absolute;
             top: 0;
             right: -346px;
             width: 336px;
             height: 300px;
+            overflow: hidden;
+            border: 1px solid #999;
+            img {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 1080px;
+              height: 1050px;
+            }
+          }
+          &:hover{
+            .levomask,
+            .levo-collect,
+            .levodiv{
+              display: block;
+            }
           }
         }
         .levo-icon {
@@ -819,12 +841,12 @@
           border-bottom: 1px solid #74cbe8;
         }
       }
-      .description-img{
+      .description-img {
         width: 804px;
         height: 1100px;
         margin: 10px auto 0;
         overflow-y: hidden;
-        img{
+        img {
           width: 860px;
           height: 1075px;
         }
@@ -873,6 +895,9 @@
           background: url("../assets/img/manual_move_btn.png") -28px 0;
         }
         ul {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 1130px;
           height: 273px;
           margin-top: 15px;
@@ -884,6 +909,7 @@
             .related-img1 {
               width: 200px;
               height: 200px;
+              cursor: pointer;
               text-align: center;
               border: 1px solid #ccc;
               &:hover {
@@ -897,6 +923,7 @@
             .related-img2 {
               width: 200px;
               height: 200px;
+              cursor: pointer;
               text-align: center;
               border: 1px solid #ccc;
               &:hover {
@@ -910,6 +937,7 @@
             .related-img3 {
               width: 200px;
               height: 200px;
+              cursor: pointer;
               line-height: 200px;
               border: 1px solid #ccc;
               &:hover {
@@ -923,6 +951,7 @@
             .related-img4 {
               width: 200px;
               height: 200px;
+              cursor: pointer;
               line-height: 200px;
               border: 1px solid #ccc;
               &:hover {
@@ -936,6 +965,7 @@
             .related-img5 {
               width: 200px;
               height: 200px;
+              cursor: pointer;
               line-height: 200px;
               border: 1px solid #ccc;
               &:hover {
@@ -961,12 +991,22 @@
             h3 {
               width: 200px;
               height: 20px;
+              cursor: pointer;
               line-height: 20px;
               text-align: center;
               font-size: 14px;
               font-weight: 700;
               color: #444;
+              &:hover {
+                color: #2090ff;
+              }
             }
+          }
+        }
+        &:hover{
+          .related-r-dw,
+          .related-l-dw{
+            display: block;
           }
         }
       }
@@ -974,3 +1014,40 @@
   }
 }
 </style>
+<script>
+export default {
+    data () {
+        return {
+            levomaskX: 0,
+            levomaskY: 0,
+            imgX: 0,
+            imgY: 0
+        }
+    },
+    methods: {
+          move (event) {
+            var mouseX = event.pageX - this.$refs.levoimg.offsetLeft
+            var mouseY = event.pageY - this.$refs.levoimg.offsetTop
+            console.log(this.$refs.levoimg.offsetLeft)
+            this.levomaskX = mouseX - this.$refs.levomask.offsetWidth / 2
+            this.levomaskY = mouseY - this.$refs.levomask.offsetHeight / 2
+            var maxX = this.$refs.levoimg.offsetWidth - this.$refs.levomask.offsetWidth
+            var maxY = this.$refs.levoimg.offsetHeight - this.$refs.levomask.offsetHeight
+            var maxBigX = this.$refs.img.offsetWidth - this.$refs.levodiv.offsetWidth
+            var maxBigY = this.$refs.img.offsetHeight - this.$refs.levodiv.offsetHeight
+            if (this.levomaskX > maxX) {
+                this.levomaskX = maxX
+            } else if (this.levomaskX < 0) {
+                this.levomaskX = 0
+            }
+            if (this.levomaskY > maxY) {
+                this.levomaskY = maxY
+            } else if (this.levomaskY < 0) {
+                this.levomaskY = 0
+            }
+            this.imgX = -maxBigX / maxX * this.levomaskX
+            this.imgY = -maxBigY / maxY * this.levomaskY
+        }
+    }
+}
+</script>
