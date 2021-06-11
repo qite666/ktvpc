@@ -48,7 +48,13 @@
 .content {
     .banner {
         position: relative;
+        left: 0;
+        right: 0;
         width: 100%;
+        height: 600px;
+        &>img {
+            height: 100%;
+        }
         .discounts {
             position: absolute;
             left: 50%;
@@ -59,18 +65,9 @@
             padding: 25px;
             background-color: rgba(102, 0, 0, .7);
             box-sizing: border-box;
-            p {
-                color: rgb(255, 255, 255);
-                font-size: 22px;
-                line-height: 2;
-                &:last-of-type {
-                    margin-top: 10px;
-                    font-weight: 400;
-                    line-height: 1.3;
-                    color: rgb(255, 255, 0);
-                    font-size: 20px;
-                }
-            }
+            font-size: 22px;
+            color: rgb(255, 255, 255);
+            line-height: 2;
         }
         .qr-code {
             position: absolute;

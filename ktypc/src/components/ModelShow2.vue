@@ -9,11 +9,11 @@
         <div class="tel">T：13688143752</div>
     </div>
     <div class="details">
-      <div class="wxfx">
+      <div class="wxfx" v-if="wxfxflag">
         <div class="wxfx-top">
           <ul>
             <li>分享到 - 微信</li>
-            <li>X</li>
+            <li @click="wxfx(false)">X</li>
           </ul>
         </div>
         <div class="wxfx-bot">
@@ -145,11 +145,11 @@
               </div>
             </div>
             <div class="levo-icon">
-              <a href=""></a>
-              <a href=""></a>
-              <a href=""></a>
-              <a href=""></a>
-              <a href=""></a>
+              <a href="javascript:;" title="分享到微信" @click="wxfx(true)"></a>
+              <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?to=pengyou&url=http%3A%2F%2Fwww.comektv.com%2Fyczp1%2Fproducts%2F14932551.html%3Fbsh_bid%3D5616688263&pics=&title=%3F%3F%3F%3F%3F&summary=%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%2C%3F%3F%3F%3F%3F%3F%3F%2C%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F." title="分享到朋友网" target="_blank"></a>
+              <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Fwww.comektv.com%2Fyczp1%2Fproducts%2F14932551.html%3Fbsh_bid%3D5616671184&title=%3F%3F%3F%3F%3F&pics=&summary=%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%2C%3F%3F%3F%3F%3F%3F%3F%2C%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F.&desc=%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%2C%3F%3F%3F%3F%3F%3F%3F%2C%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F." title="分享到QQ空间" target="_blank"></a>
+              <a href="http://v.t.sina.com.cn/share/share.php?appkey=583395093&title=%3F%3F%3F%3F%3F%20-%20%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%2C%3F%3F%3F%3F%3F%3F%3F%2C%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F%3F.%20%20&url=http%3A%2F%2Fwww.comektv.com%2Fyczp1%2Fproducts%2F14932551.html%3Fbsh_bid%3D5616686444&source=bshare&retcode=0&ralateUid=" title="分享到新浪微博"  target="_blank"></a>
+              <a href="javascript:;" title="更多平台"></a>
             </div>
           </div>
           <div class="ocutome">
@@ -199,6 +199,10 @@
         left: 0;
         right: 0;
         width: 100%;
+        height: 600px;
+        &>img {
+            height: 100%;
+        }
         .discounts {
             position: absolute;
             left: 50%;
@@ -212,14 +216,35 @@
             font-size: 22px;
             color: rgb(255, 255, 255);
             line-height: 2;
-          }
         }
+        .qr-code {
+            position: absolute;
+            width: 134px;
+            height: 134px;
+            top: 408px;
+            left: 50%;
+            margin: -67px;
+        }
+        .tel {
+            position: absolute;
+            width: 135px;
+            height: 45px;
+            line-height: 45px;
+            left: 50%;
+            top: 556px;
+            margin: -67px;
+            background-color: #d9534f;
+            border-color: #d43f3a;
+            font-size: 16px;
+            color: #fff;
+            text-align: center;
+        }
+    }
 .details {
   width: 1210px;
   height: 2018px;
   margin: 10px auto 10px;
   .wxfx {
-    display: none;
     left: 50%;
     top: 50%;
     margin-left: -110px;
@@ -972,7 +997,8 @@ export default {
             msg: 1,
             modelData: [],
             value: '',
-            bannerImg: ''
+            bannerImg: '',
+            wxfxflag: false
         }
     },
     methods: {
@@ -1036,6 +1062,9 @@ export default {
             }
           }
         }
+      },
+      wxfx (flag) {
+        this.wxfxflag = flag
       }
     },
   components: {

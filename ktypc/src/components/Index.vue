@@ -97,6 +97,10 @@
         left: 0;
         right: 0;
         width: 100%;
+        height: 600px;
+        &>img {
+            height: 100%;
+        }
         .discounts {
             position: absolute;
             left: 50%;
@@ -500,6 +504,7 @@ export default {
     this.$http.get('index.php/api/carousel_map/list').then(res => {
         this.value = res[0].content
         this.bannerImg = res[0].image
+        console.log(res)
     })
     this.$http.get('index.php/api/models/list').then(res => {
         this.modelData = res.filter((val, index) => index <= 5)
