@@ -63,57 +63,26 @@
   </div>
 </template>
 <style lang="less" scoped>
-.banner {
-  position: relative;
-  left: 0;
-  right: 0;
-  width: 100%;
-  .discounts {
-    position: absolute;
-    left: 50%;
-    top: 128px;
-    width: 803px;
-    height: 185px;
-    margin-left: -401.5px;
-    padding: 25px;
-    background-color: rgba(102, 0, 0, .7);
-    box-sizing: border-box;
-    p {
-      color: rgb(255, 255, 255);
-      font-size: 22px;
-      line-height: 2;
-      &:last-of-type {
-        margin-top: 10px;
-        font-weight: 400;
-        line-height: 1.3;
-        color: rgb(255, 255, 0);
-        font-size: 20px;
-      }
-    }
-  }
-  .qr-code {
-    position: absolute;
-    width: 134px;
-    height: 134px;
-    top: 408px;
-    left: 50%;
-    margin: -67px;
-  }
-  .tel {
-    position: absolute;
-    width: 135px;
-    height: 45px;
-    line-height: 45px;
-    left: 50%;
-    top: 556px;
-    margin: -67px;
-    background-color: #d9534f;
-    border-color: #d43f3a;
-    font-size: 16px;
-    color: #fff;
-    text-align: center;
-  }
-}
+    .banner {
+        position: relative;
+        left: 0;
+        right: 0;
+        width: 100%;
+        .discounts {
+            position: absolute;
+            left: 50%;
+            top: 128px;
+            width: 803px;
+            height: 185px;
+            margin-left: -401.5px;
+            padding: 25px;
+            background-color: rgba(102, 0, 0, .7);
+            box-sizing: border-box;
+            font-size: 22px;
+            color: rgb(255, 255, 255);
+            line-height: 2;
+          }
+        }
 .navigation {
   width: 1200px;
   margin: 0 auto;
