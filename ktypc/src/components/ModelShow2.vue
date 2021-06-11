@@ -1,5 +1,13 @@
 <template>
   <div>
+      <div class="banner">
+        <img :src="imgUrl + bannerImg" alt="">
+        <div class="discounts">
+          <VueMarkdown :source="value"></VueMarkdown>
+        </div>
+        <div class="qr-code"><img src="../assets/img/patrick.png" alt=""></div>
+        <div class="tel">T：13688143752</div>
+    </div>
     <div class="details">
       <div class="wxfx">
         <div class="wxfx-top">
@@ -186,6 +194,57 @@
   </div>
 </template>
 <style lang="less" scoped>
+.banner {
+  position: relative;
+  left: 0;
+  right: 0;
+  width: 100%;
+  .discounts {
+    position: absolute;
+    left: 50%;
+    top: 128px;
+    width: 803px;
+    height: 185px;
+    margin-left: -401.5px;
+    padding: 25px;
+    background-color: rgba(102, 0, 0, .7);
+    box-sizing: border-box;
+    p {
+      color: rgb(255, 255, 255);
+      font-size: 22px;
+      line-height: 2;
+      &:last-of-type {
+        margin-top: 10px;
+        font-weight: 400;
+        line-height: 1.3;
+        color: rgb(255, 255, 0);
+        font-size: 20px;
+      }
+    }
+  }
+  .qr-code {
+    position: absolute;
+    width: 134px;
+    height: 134px;
+    top: 408px;
+    left: 50%;
+    margin: -67px;
+  }
+  .tel {
+    position: absolute;
+    width: 135px;
+    height: 45px;
+    line-height: 45px;
+    left: 50%;
+    top: 556px;
+    margin: -67px;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+  }
+}
 .details {
   width: 1210px;
   height: 2018px;
@@ -926,6 +985,7 @@
 }
 </style>
 <script>
+import VueMarkdown from 'vue-markdown'
 export default {
     data () {
         return {
@@ -939,7 +999,11 @@ export default {
             title: '',
             relatedData: [],
             left: 0,
-            flag: true
+            flag: true,
+            msg: 1,
+            modelData: [],
+            value: '',
+            bannerImg: ''
         }
     },
     methods: {
@@ -1005,6 +1069,9 @@ export default {
         }
       }
     },
+  components: {
+    VueMarkdown
+  },
     mounted () {
         this.id = parseInt(this.$route.params.id)
         this.$http.get('index.php/api/models/list').then(res => {
@@ -1013,6 +1080,14 @@ export default {
             var index = this.data.findIndex(val => this.id === val.id)
             this.img = this.data[index].image
             this.title = this.data[index].title
+        })
+        // 轮播图
+        this.$http.get('index.php/api/carousel_map/list').then(res => {
+            this.value = res[0].content
+            this.bannerImg = res[0].image
+        })
+        this.$http.get('index.php/api/models/list').then(res => {
+            this.modelData = res.filter((val, index) => index <= 5)
         })
     }
 }
