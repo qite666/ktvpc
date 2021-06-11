@@ -75,7 +75,7 @@
           height: 100%;
           cursor: pointer;
           a {
-            padding: 0 22px 30.5px;
+            padding: 0 22px 39.5px;
           }
         }
         &:hover a {
@@ -84,7 +84,7 @@
         }
         a {
           font-size: 14px;
-          padding: 0 22px 30.5px;
+          padding: 0 22px 39.5px;
         }
       }
       .current {

@@ -12,9 +12,11 @@
             </div>
             <div class="circumstances-box">
                 <div class="circumstances">
+                    <div class="headline">
                     <h2>ENVIRONMENTAL DISPLAY</h2>
                     <p>环境/AMBIENT</p>
                     <div class="border"></div>
+                    </div>
                     <ul class="clearfix">
                         <li v-for="val in environmental" :key="val.image">
                             <a href="javascript:;">
@@ -148,26 +150,28 @@
             width: 1200px;
             height: 948px;
             margin: 0 auto;
-            h2 {
-                padding-top: 66px;
-                color: #212121;
-                font-size: 36px;
-                font-weight: 700;
-            }
-            p {
-                padding: 15px 0 8px;
-                color: #989898;
-                font-size: 18px;
-                line-height: 2;
-            }
-            .border {
-                width: 36px;
-                height: 2px;
-                margin: 0 auto;
-                background-color: rgb(60, 181, 213);
-            }
+                animation: move 1s;
+                h2 {
+                    padding-top: 66px;
+                    color: #212121;
+                    font-size: 36px;
+                    font-weight: 700;
+                }
+                p {
+                    padding: 15px 0 8px;
+                    color: #989898;
+                    font-size: 18px;
+                    line-height: 2;
+                }
+                .border {
+                    width: 36px;
+                    height: 2px;
+                    margin: 0 auto;
+                    background-color: rgb(60, 181, 213);
+                }
             ul {
                 margin-top: 90px;
+                animation: move 1s;
                 li {
                     float: left;
                     width: 380px;
@@ -250,6 +254,7 @@
             font-size: 18px;
             color: #FFFFFF;
             line-height: 1.9;
+            animation: movetwo 1s;
         }
         h2 {
             padding: 30px 0;
@@ -291,12 +296,14 @@
                 font-size: 32px;
                 color: #333333;
                 line-height: 1.9;
+                animation: movetree 1s;
             }
             div {
                 width: 36px;
                 height: 2px;
                 margin: 0 auto;
                 background-color: rgb(60, 181, 213);
+                animation: movetree 1s;
             }
             ul {
                 width: 100%;
@@ -337,18 +344,21 @@
             color: #212121;
             font-size: 36px;
             font-weight: 700;
+            animation: moveform 1s;
         }
         &>p {
             padding: 15px 0 8px;
             color: #989898;
             font-size: 18px;
             line-height: 2;
+            animation: moveform 1s;
         }
         .border {
             width: 36px;
             height: 2px;
             margin: 0 auto;
             background-color: rgb(60, 181, 213);
+            animation: moveform 1s;
         }
         .journalism-hd {
             width: 100%;
@@ -428,6 +438,50 @@
     height: 1000px;
     z-index: -1;
     background: url('../assets/img/banner-1.jpg') top center;
+}
+@keyframes move {
+  0% {
+    opacity: 0;
+    transform: translate(0, 440px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes movetwo {
+  0% {
+    opacity: 0;
+    transform: translate(0, 62px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes movetree {
+  0% {
+    opacity: 0;
+    transform: translate(0, 159px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes moveform {
+  0% {
+    opacity: 0;
+    transform: translate(0, 146px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }
 </style>
 <script>

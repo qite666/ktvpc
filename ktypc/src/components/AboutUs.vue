@@ -43,6 +43,7 @@
     .center-left {
       width: 232px;
       height: 180px;
+      animation: move 1s;
       ul {
         width: 100%;
         height: 100%;
@@ -73,6 +74,7 @@
       height: 827px;
       background-color: #fff;
       box-sizing: border-box;
+      animation: move 1s ease .2s;
       h2 {
         line-height: 3;
         margin-bottom: 20px;
@@ -82,6 +84,17 @@
         border-bottom: 1px solid #666;
       }
     }
+  }
+}
+@keyframes move {
+  0% {
+    opacity: 0;
+    transform: translate(0, 360px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
   }
 }
 </style>
